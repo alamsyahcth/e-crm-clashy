@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home');
 });
+
+Auth::routes();
+
+Route::group(['middleware' => ['admin']], function() {
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::get('/', function() {
+            return view('backend.dashboard.index');
+        });
+    });
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
