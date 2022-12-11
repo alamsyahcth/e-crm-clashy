@@ -5,62 +5,96 @@
         <h6>{{ config('app.name', 'Clashy') }}</h6>
       </a>
     </li>
-    <li class="nav-item mt-5">
-      <a class="nav-link" href="index.html">
+    <li class="nav-item active mt-5">
+      <a class="nav-link active @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">
         <i class="mdi mdi-compass-outline menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
+    <div class="py-1">
+      <hr>
+    </div>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-        <span class="menu-title">UI Elements</span>
+      <a class="nav-link @if(request()->is('admin/customer*')) active @endif" href="{{ url('admin/customer') }}">
+        <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+        <span class="menu-title">Customer</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">
+        <i class="mdi mdi-message-text-outline menu-icon"></i>
+        <span class="menu-title">Diskusi</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">
+        <i class="mdi mdi-thumb-down-outline menu-icon"></i>
+        <span class="menu-title">Keluhan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">
+        <i class="mdi mdi-contact-mail menu-icon"></i>
+        <span class="menu-title">Kontak</span>
+      </a>
+    </li>
+    <div class="py-1">
+      <hr>
+    </div>
+    <li class="nav-item @if(request()->is('admin/produk*') || request()->is('admin/kategori-produk*')) active @endif">
+      <a class="nav-link @if(!request()->is('admin/produk*') || !request()->is('admin/kategori-produk*')) collapsed @endif" data-toggle="collapse" href="#menu-products" aria-expanded="@if(request()->is('admin/produk*') || request()->is('admin/kategori-produk*')) true @else false @endif" aria-controls="menu-products">
+        <i class="mdi mdi-sunglasses menu-icon"></i>
+        <span class="menu-title">Produk</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="ui-basic">
+      <div class="collapse @if(request()->is('admin/produk*') || request()->is('admin/kategori-produk*')) show @endif" id="menu-products">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">
-            <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+          <li class="nav-item @if(request()->is('admin/produk*')) active @endif">
+            <a class="nav-link @if(request()->is('admin/produk*')) active @endif" href="{{ url('admin/produk') }}">Data Produk</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+          <li class="nav-item @if(request()->is('admin/kategori-produk*')) active @endif">
+            <a class="nav-link @if(request()->is('admin/kategori-produk*')) active @endif" href="{{ url('admin/kategori-produk') }}">Kategori Produk</a>
           </li>
         </ul>
       </div>
     </li>
+    <div class="py-1">
+      <hr>
+    </div>
     <li class="nav-item">
-      <a class="nav-link" href="pages/icons/mdi.html">
-        <i class="mdi mdi-contacts menu-icon"></i>
-        <span class="menu-title">Icons</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="pages/forms/basic_elements.html">
-        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-        <span class="menu-title">Forms</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="pages/charts/chartjs.html">
+      <a class="nav-link @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">
         <i class="mdi mdi-chart-bar menu-icon"></i>
-        <span class="menu-title">Charts</span>
+        <span class="menu-title">Laporan 1</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="pages/tables/basic-table.html">
-        <i class="mdi mdi-table-large menu-icon"></i>
-        <span class="menu-title">Tables</span>
+      <a class="nav-link @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">
+        <i class="mdi mdi-chart-bar menu-icon"></i>
+        <span class="menu-title">Laporan 2</span>
       </a>
     </li>
-    <li class="nav-item pt-3">
-      <a class="nav-link" href="http://bootstrapdash.com/demo/plus-free/documentation/documentation.html"
-        target="_blank">
-        <i class="mdi mdi-file-document-box menu-icon"></i>
-        <span class="menu-title">Documentation</span>
+    <div class="py-1">
+      <hr>
+    </div>
+    <li class="nav-item @if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*')) active @endif">
+      <a class="nav-link @if(!request()->is('admin/user') || !request()->is('admin/user/create') || !request()->is('admin/banner*')) collapsed @endif" data-toggle="collapse" href="#menu-settings" aria-expanded="@if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*')) true @else false @endif" aria-controls="menu-settings">
+        <i class="mdi mdi-settings menu-icon"></i>
+        <span class="menu-title">Pengaturan</span>
+        <i class="menu-arrow"></i>
       </a>
+      <div class="collapse @if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*')) show @endif" id="menu-settings">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item @if(request()->is('admin/banner*')) active @endif">
+            <a class="nav-link @if(request()->is('admin/banner*')) active @endif" href="{{ url('admin/banner') }}">Banner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link @if(request()->is('admin/dashboard*')) active @endif" href="{{ url('admin/dashboard') }}">General</a>
+          </li>
+          <li class="nav-item @if(request()->is('admin/user') || request()->is('admin/user/create')) active @endif">
+            <a class="nav-link @if(request()->is('admin/user') || request()->is('admin/user/create')) active @endif" href="{{ url('admin/user') }}">Manage Admin</a>
+          </li>
+        </ul>
+      </div>
     </li>
   </ul>
 </nav>

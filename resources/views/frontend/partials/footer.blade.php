@@ -91,10 +91,11 @@
   </div>
 </footer>
 <!-- JavaScript files-->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/glightbox/js/glightbox.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/nouislider/nouislider.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ asset('vendor/swiper/swiper.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 <script src="{{ asset('frontend/js/front.js') }}"></script>
 <script>

@@ -11,226 +11,168 @@
 @section('content')
 <!-- HERO SECTION-->
 <div class="container">
-  <section class="hero pb-3 bg-cover bg-center d-flex align-items-center"
-    style="background: url({{ asset('frontend/img/hero-banner-alt.jpg') }})">
-    <div class="container py-5">
-      <div class="row px-4 px-lg-5">
-        <div class="col-lg-6">
-          <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>
-          <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="shop.html">Browse
-            collections</a>
+  <div class="row">
+    <div class="col-md-12 position-relative">
+      <div class="swiper banner-slide">
+        <div class="swiper-wrapper">
+          @foreach($banner as $value)
+          <div class="swiper-slide hero pb-3 bg-cover bg-center d-flex align-items-center"
+            style="background: url({{ asset('img/banner/'.$value->image) }})">
+            <div class="container py-5">
+              <div class="row px-4 px-lg-5">
+                <div class="col-lg-6">
+                  <p class="text-muted small text-uppercase mb-2">{{ $value->description }}</p>
+                  <h1 class="h2 text-uppercase mb-3">{{ $value->title }}</h1>
+                  <a class="btn btn-dark" href="{{ url('/produk/'.$value->link) }}">Lihat Produk</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endforeach
         </div>
+        <div class="swiper-pagination"></div>
       </div>
+      <div class="swiper-button-next"><img src="{{ asset('img/arrow-right.svg') }}" alt=""></div>
+      <div class="swiper-button-prev"><img src="{{ asset('img/arrow-left.svg') }}" alt=""></div>
     </div>
-  </section>
+  </div>
   <!-- CATEGORIES SECTION-->
   <section class="pt-5">
     <header class="text-center">
-      <p class="small text-muted small text-uppercase mb-1">Carefully created collections</p>
-      <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
+      <p class="small text-muted small text-uppercase mb-1">Koleksi Menarik Dari Kami</p>
+      <h2 class="h5 text-uppercase mb-4">Kategori Produk</h2>
     </header>
     <div class="row">
-      <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid"
-            src="{{ asset('frontend/img/cat-img-1.jpg') }}" alt="" /><strong
-            class="category-item-title">Clothes</strong></a>
+      @foreach($category as $value)
+      <div class="col-md-4">
+        <a class="category-item" href="{{ url('/'.$value->slug) }}">
+          <img class="img-fluid img-category" src="{{ asset('img/categoryProduct/'.$value->image) }}" alt="" />
+          <strong class="category-item-title">{{ $value->name }}</strong>
+        </a>
       </div>
-      <div class="col-md-4"><a class="category-item mb-4" href="shop.html"><img class="img-fluid"
-            src="{{ asset('frontend/img/cat-img-2.jpg') }}" alt="" /><strong
-            class="category-item-title">Shoes</strong></a><a class="category-item" href="shop.html"><img
-            class="img-fluid" src="{{ asset('frontend/img/cat-img-3.jpg') }}" alt="" /><strong
-            class="category-item-title">Watches</strong></a>
-      </div>
-      <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid"
-            src="{{ asset('frontend/img/cat-img-4.jpg') }}" alt="" /><strong
-            class="category-item-title">Electronics</strong></a>
-      </div>
+      @endforeach
     </div>
   </section>
   <!-- TRENDING PRODUCTS-->
   <section class="py-5">
     <header>
-      <p class="small text-muted small text-uppercase mb-1">Made the hard way</p>
-      <h2 class="h5 text-uppercase mb-4">Top trending products</h2>
+      <p class="small text-muted small text-uppercase mb-1">Kami Selalu Memberikan Produk Terbaik</p>
+      <h2 class="h5 text-uppercase mb-4">Rekomendasi Produk</h2>
     </header>
     <div class="row">
-      <!-- PRODUCT-->
+      
+      @foreach($product as $value)
       <div class="col-xl-3 col-lg-4 col-sm-6">
         <div class="product text-center">
           <div class="position-relative mb-3">
-            <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100"
-                src="{{ asset('frontend/img/product-1.jpg') }}" alt="..."></a>
+            <div class="badge text-white bg-"></div>
+            <a class="d-block" href="{{ url('produk/'.$value->slug) }}">
+              <img class="img-fluid img-product w-100" src="{{ asset('img/product/'.$value->image) }}" alt="{{ $value->name }}">
+            </a>
             <div class="product-overlay">
               <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
+                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i class="far fa-heart"></i></a></li>
+                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ url('produk/'.$value->slug) }}">Lihat Produk</a>
                 </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
               </ul>
             </div>
           </div>
-          <h6> <a class="reset-anchor" href="detail.html">Kui Ye Chen’s AirPods</a></h6>
-          <p class="small text-muted">$250</p>
+          <h6> <a class="reset-anchor" href="{{ url('produk/'.$value->slug) }}">{{ $value->name }}</a></h6>
+          <p class="small text-muted">{{ currency($value->price) }}</p>
         </div>
       </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-primary">Sale</div><a class="d-block" href="detail.html"><img
-                class="img-fluid w-100" src="{{ asset('frontend/img/product-2.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Air Jordan 12 gym red</a></h6>
-          <p class="small text-muted">$300</p>
-        </div>
-      </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100"
-                src="{{ asset('frontend/img/product-3.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Cyan cotton t-shirt</a></h6>
-          <p class="small text-muted">$25</p>
-        </div>
-      </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-info">New</div><a class="d-block" href="detail.html"><img
-                class="img-fluid w-100" src="{{ asset('frontend/img/product-4.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Timex Unisex Originals</a></h6>
-          <p class="small text-muted">$351</p>
-        </div>
-      </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-danger">Sold</div><a class="d-block" href="detail.html"><img
-                class="img-fluid w-100" src="{{ asset('frontend/img/product-5.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Red digital smartwatch</a></h6>
-          <p class="small text-muted">$250</p>
-        </div>
-      </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100"
-                src="{{ asset('frontend/img/product-6.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Nike air max 95</a></h6>
-          <p class="small text-muted">$300</p>
-        </div>
-      </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100"
-                src="{{ asset('frontend/img/product-7.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Joemalone Women prefume</a></h6>
-          <p class="small text-muted">$25</p>
-        </div>
-      </div>
-      <!-- PRODUCT-->
-      <div class="col-xl-3 col-lg-4 col-sm-6">
-        <div class="product text-center">
-          <div class="position-relative mb-3">
-            <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100"
-                src="{{ asset('frontend/img/product-8.jpg') }}" alt="..."></a>
-            <div class="product-overlay">
-              <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
-                      class="far fa-heart"></i></a></li>
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
-                </li>
-                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                    data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <h6> <a class="reset-anchor" href="detail.html">Apple Watch</a></h6>
-          <p class="small text-muted">$351</p>
-        </div>
-      </div>
+      @endforeach
+
+      {!! $product->links() !!}
+  
     </div>
   </section>
 @endsection
 
 @push('style')
+<style>
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  background: #fff;
 
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.swiper-horizontal>.swiper-pagination-progressbar, .swiper-pagination-progressbar.swiper-pagination-horizontal, .swiper-pagination-progressbar.swiper-pagination-vertical.swiper-pagination-progressbar-opposite, .swiper-vertical>.swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
+  width: 100%;
+  height: 4px;
+  left: 0;
+  bottom: 0;
+  top: unset;
+}
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: #00000038;
+}
+.swiper-pagination-progressbar {
+  background: #00000008;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+  font-size: 0;
+}
+.swiper-button-next{
+  right: -5px;
+}
+.swiper-button-prev{
+  left: -5px;
+}
+@media only screen and (max-width: 767px) {
+  .swiper-button-next{
+    bottom: 20px !important;
+    top: unset;
+    right: 30px;
+  }
+  .swiper-button-prev{
+    bottom: 20px !important;
+    top: unset;
+    left: auto;
+    right: 70px;
+  }
+}
+.img-category{
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.img-product{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+</style>
 @endpush
 
 @push('script')
-
+<script>
+var swiper = new Swiper(".banner-slide", {
+  pagination: {
+    el: ".swiper-pagination",
+    type: "progressbar",
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
+</script>
 @endpush
 
 @push('modal')
