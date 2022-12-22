@@ -2,7 +2,7 @@
   <div class="container px-lg-3">
     <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
       <a class="navbar-brand" href="{{ url('/') }}">
-        <span class="fw-bold text-uppercase text-dark">{{ config('app.name', 'Clashy') }}</span>
+        <img src="{{ asset('img/logo.jpg') }}" alt="" width="150px">
       </a>
       <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -16,15 +16,8 @@
           <li class="nav-item">
             <a class="nav-link @if(request()->is('produk*')) active @endif" href="{{ url('/produk') }}">Produk</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link @if(request()->is('contact-us*')) active @endif" href="{{ url('/contact-us') }}">Contact Us</a>
-          </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#!"> 
-              <i class="far fa-heart me-1"></i><small class="text-gray fw-normal"> (0)</small></a>
-          </li>
-
           @guest
             <li class="nav-item"><a class="nav-link @if(request()->is('login*')) active @endif" href="{{ url('login') }}">
               <i class="fas fa-user me-1 text-gray fw-normal"></i>Login</a>

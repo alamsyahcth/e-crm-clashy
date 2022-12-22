@@ -1,14 +1,11 @@
 <?php
 
 function currency($number) {
-	
 	$currency = "Rp " . number_format($number,2,',','.');
 	return $currency;
- 
 }
 
 function getDateFormat($date) {
-
   $month = array(
     1 => 'Januari',
     2 => 'Februari',
@@ -23,9 +20,11 @@ function getDateFormat($date) {
     11 => 'November',
     12 => 'Desember',
   );
-
   $break = explode('-', $date);
-
   return $break[2].' '.$month[ (int)$break[1] ].' '.$break[0];
-	
+}
+
+function timeFormat($time) {
+  $break = explode(':', $time);
+  return $break[0].'.'.$break[1];
 }

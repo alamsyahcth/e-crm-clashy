@@ -12,6 +12,7 @@ class Discussion extends Model
     protected $fillable = [
         'product_id',
         'user_id',
-        'message'
+        'message',
+        'status'
     ];
 }

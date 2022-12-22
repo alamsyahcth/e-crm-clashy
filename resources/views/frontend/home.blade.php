@@ -13,6 +13,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 position-relative">
+      @if(Auth::check() == true)
+        @if(Auth::user()->role == 2)
+          @if(Auth::user()->point == 30)
+            <div class="card bg-primary border-0 mb-3">
+              <div class="card-body">
+                <h5 class="mb-0">Selamat {{ Auth::user()->name }} point kamu sudah 30 dapatkan promo menarik dari kami !</h5>
+              </div>
+            </div>
+          @endif
+        @endif
+      @endif
       <div class="swiper banner-slide">
         <div class="swiper-wrapper">
           @foreach($banner as $value)
@@ -71,7 +82,6 @@
             </a>
             <div class="product-overlay">
               <ul class="mb-0 list-inline">
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i class="far fa-heart"></i></a></li>
                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ url('produk/'.$value->slug) }}">Lihat Produk</a>
                 </li>
               </ul>

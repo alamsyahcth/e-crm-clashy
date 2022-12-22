@@ -4,8 +4,7 @@
       <span class="mdi mdi-chevron-double-left"></span>
     </button>
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('backend/images/logo-mini.svg') }}"
-          alt="logo" /></a>
+      <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}"><img src="{{ asset('img/logo.jpg') }}" alt="logo" /></a>
     </div>
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item nav-profile dropdown d-none d-md-block">

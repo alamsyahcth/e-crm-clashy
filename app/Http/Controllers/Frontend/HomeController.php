@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Banner;
 use App\Models\CategoryProduct;
 use App\Models\Product;
+use App\Models\Schedule;
 
 class HomeController extends Controller
 {

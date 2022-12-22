@@ -24,8 +24,19 @@ class CategoryController extends Controller
             return view('auth.login');
         } else if($slug == 'register') {
             return view('auth.register');
+        } else if ($slug == 'admin') {
+            return redirect('admin/dashboard');
+        } else if ($slug == 'book') {
+            return abort(404);
+        } else if ($slug == 'profil') {
+            return redirect('profil/edit-profil');
         } else {
-            $product = Product::where('category_id', $category->id)->paginate(1);   
+            $dataProduct = Product::where('category_id', $category->id);
+            if($dataProduct->count() == 0) {
+                return abort(404);
+            } else {
+                $product = $dataProduct->paginate(1);
+            }
         }
         return view('frontend.category', compact([
             'category',

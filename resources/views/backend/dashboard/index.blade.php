@@ -1,61 +1,115 @@
 @extends('backend.layouts.app')
+@php $link = str_replace(' ', '-', strtolower($page)) @endphp
+@section('titlePage', $page)
+@section('rightHeader')
+
+@endsection
 
 @section('content')
 <div class="row">
-  <div class="col-xl-9 stretch-card grid-margin">
+  <div class="col-md-8 stretch-card grid-margin">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between flex-wrap">
           <div>
-            <div class="card-title mb-0">Sales Revenue</div>
-            <h3 class="font-weight-bold mb-0">$32,409</h3>
-          </div>
-          <div>
-            <div class="d-flex flex-wrap pt-2 justify-content-between sales-header-right">
-              <div class="d-flex mr-5">
-                <button type="button" class="btn btn-social-icon btn-outline-sales">
-                  <i class="mdi mdi-inbox-arrow-down"></i>
-                </button>
-                <div class="pl-2">
-                  <h4 class="mb-0 font-weight-semibold head-count"> $8,217 </h4>
-                  <span class="font-10 font-weight-semibold text-muted">TOTAL SALES</span>
-                </div>
-              </div>
-              <div class="d-flex mr-3 mt-2 mt-sm-0">
-                <button type="button" class="btn btn-social-icon btn-outline-sales profit">
-                  <i class="mdi mdi-cash text-info"></i>
-                </button>
-                <div class="pl-2">
-                  <h4 class="mb-0 font-weight-semibold head-count"> 2,804 </h4>
-                  <span class="font-10 font-weight-semibold text-muted">TOTAL PROFIT</span>
-                </div>
-              </div>
-            </div>
+            <div class="card-title mb-0">Total Keseluruhan Bintang</div>
+            <h3 class="font-weight-bold mb-0">{{ $getStars }} <i class="mdi mdi-star text-warning"></i></h3>
           </div>
         </div>
-        <p class="text-muted font-13 mt-2 mt-sm-0"> Your sales monitoring dashboard template. <a
-            class="text-muted font-13" href="#"><u>Learn more</u></a>
-        </p>
-        <div class="flot-chart-wrapper">
-          <div id="flotChart" class="flot-chart">
-            <canvas class="flot-base"></canvas>
-          </div>
+        <div class="flot-chart-wrapper mt-5">
+          <canvas id="chartStars"></canvas>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-xl-3 stretch-card grid-margin">
-    <div class="card card-img">
-      <div class="card-body d-flex align-items-center">
-        <div class="text-white">
-          <h1 class="font-20 font-weight-semibold mb-0"> Get premium </h1>
-          <h1 class="font-20 font-weight-semibold">account!</h1>
-          <p>to optimize your selling prodcut</p>
-          <p class="font-10 font-weight-semibold"> Enjoy the advantage of premium. </p>
-          <button class="btn bg-white font-12">Get Premium</button>
+  <div class="col-md-4 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex mb-4 pb-2">
+          <div class="hexagon">
+            <div class="hex-mid hexagon-warning">
+              <i class="mdi mdi mdi-book-open"></i>
+            </div>
+          </div>
+          <div class="pl-4">
+            <h4 class="font-weight-bold text-warning mb-0"> {{ $booking }} </h4>
+            <h6 class="text-muted">Total Booking</h6>
+          </div>
+        </div>
+        <div class="d-flex mb-4 pb-2">
+          <div class="hexagon">
+            <div class="hex-mid hexagon-danger">
+              <i class="mdi mdi-sunglasses"></i>
+            </div>
+          </div>
+          <div class="pl-4">
+            <h4 class="font-weight-bold text-danger mb-0">{{ $product }}</h4>
+            <h6 class="text-muted">Jumlah Produk</h6>
+          </div>
+        </div>
+        <div class="d-flex mb-4 pb-2">
+          <div class="hexagon">
+            <div class="hex-mid hexagon-success">
+              <i class="mdi mdi-account-multiple-outline"></i>
+            </div>
+          </div>
+          <div class="pl-4">
+            <h4 class="font-weight-bold text-success mb-0"> {{ $customer }} </h4>
+            <h6 class="text-muted">Jumlah Customer</h6>
+          </div>
+        </div>
+        <div class="d-flex mb-4 pb-2">
+          <div class="hexagon">
+            <div class="hex-mid hexagon-info">
+              <i class="mdi mdi-calendar-multiple"></i>
+            </div>
+          </div>
+          <div class="pl-4">
+            <h4 class="font-weight-bold text-info mb-0">{{ $schedule }}</h4>
+            <h6 class="text-muted">Jumlah Jadwal Aktif</h6>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="hexagon">
+            <div class="hex-mid hexagon-primary">
+              <i class="mdi mdi-emoticon-sad"></i>
+            </div>
+          </div>
+          <div class="pl-4">
+            <h4 class="font-weight-bold text-primary mb-0">{{ $complain }}</h4>
+            <h6 class="text-muted mb-0">Jumlah Keluhan</h6>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+@for($i=1; $i<=5; $i++)
+  <input type="hidden" id="stars-{{ $i }}" value="{{ $dataStars[$i] }}">
+@endfor
 @endsection
+
+@push('script')
+<script src="{{ asset('vendor/chartjs/chartjs.js') }}"></script>
+<script>
+  const ctx = document.getElementById('chartStars');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Bintang 1', 'Bintang 2', 'Bintang 3', 'Bintang 4', 'Bintang 5'],
+      datasets: [{
+        label: 'Jumlah Bintang',
+        data: [$('#stars-1').val(),$('#stars-2').val(),$('#stars-3').val(),$('#stars-4').val(),$('#stars-5').val(),],
+        backgroundColor: '#fad505',
+      }],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+@endpush
