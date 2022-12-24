@@ -38,7 +38,7 @@
             <p>Waktu: <strong>{{ timeFormat($data->time_start) .'-'. timeFormat($data->time_end) }}</strong></p>
           </div>
           <div class="col-md-4">
-            <p>Therapist: <strong>{{ $data->employee_name }} ({{ $data->employee_phone }})</strong></p>
+            <p>Eyelash technician: <strong>{{ $data->employee_name }} ({{ $data->employee_phone }})</strong></p>
           </div>
         </div>
       </div>

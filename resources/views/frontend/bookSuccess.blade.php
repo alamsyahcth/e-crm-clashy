@@ -53,7 +53,7 @@
                 <p class="mb-0">{{ timeFormat($dataBook->time_start) .'-'. timeFormat($dataBook->time_end) }}</p>
               </div>
               <div class="col-md-12 d-flex justify-content-between align-items-center border-bottom py-2">
-                <p class="text-muted mb-0">Therapist</p>
+                <p class="text-muted mb-0">Eyelash technician</p>
                 <p class="mb-0">{{ $dataBook->employee_name }}</p>
               </div>
               <hr>

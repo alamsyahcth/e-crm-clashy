@@ -83,7 +83,7 @@
         <td width="35%">: <strong>{{ timeFormat($data->time_start) .'-'. timeFormat($data->time_end) }}</strong></td>
       </tr>
       <tr style="border-bottom: 1px solid #e0e0e0;">
-        <td width="25%" style="padding-bottom: 30px;">Nama Therapist</td>
+        <td width="25%" style="padding-bottom: 30px;">Nama Eyelash technician</td>
         <td colspan="3" style="padding-bottom: 30px;">: <strong>{{ $data->employee_name.' ('.$data->employee_phone.')' }}</strong></td>
       </tr>
       <tr>

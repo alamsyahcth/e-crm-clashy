@@ -41,7 +41,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex justify-content-start align-items-center">
                 <div class="d-block me-5">
-                  <p class="mb-0 text-muted">Nama Therapist</p>
+                  <p class="mb-0 text-muted">Nama Eyelash technician</p>
                   @foreach($employee as $employeeValues)
                     @if($value->employee_id == $employeeValues->id)
                       <h6>{{ $employeeValues->name }}</h6>
@@ -107,8 +107,8 @@
             <p class="mb-0 getTime"></p>
           </div>
           <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
-            <p class="text-muted mb-0">Therapist</p>
-            <p class="mb-0 getTherapist"></p>
+            <p class="text-muted mb-0">Eyelash technician</p>
+            <p class="mb-0 getEyelashTechnician"></p>
           </div>
         </div>
         <input type="hidden" name="schedule_detail_id" id="scheduleDetailId">
@@ -139,7 +139,7 @@ $(document).on('click', '.btn-choose-time', function() {
   $('#modalBook').modal('show');
   $('#scheduleDetailId').val($(this).data('id'));
   $('.getTime').html($(this).data('time'));
-  $('.getTherapist').html($(this).data('employee'));
+  $('.getEyelashTechnician').html($(this).data('employee'));
 })
 </script>
 @endpush

@@ -26,8 +26,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-        $getStars = Review::sum('stars')/Review::count();
+        if(Review::count() == 0) {
+            $getStars = null;
+        } else {
+            $getStars[] = Review::sum('stars')/Review::count();
+        }
         $dataStars = array();
         for($i=1; $i<=5; $i++) {
             $dataStars[$i] = Review::where('stars', $i)->count();

@@ -25,7 +25,11 @@ class ProductController extends Controller
         $countDiscussion = $discussion->count();
         $discussionReplies = DisscussionReply::get();
         $getReview = Review::where('product_id', $product->id);
-        $getStars = $getReview->sum('stars')/$getReview->count();
+        if($getReview->count() == null ) {
+            $getStars = null;
+        } else {
+            $getStars = $getReview->sum('stars')/$getReview->count();
+        }
         if(Auth::check() == true) {
             $showReview = Review::where('product_id', $product->id)->where('user_id', Auth::user()->id)->first();
             $complain = Complain::join('users','users.id','=','complains.user_id')->where('product_id', $product->id)->where('users.id', Auth::user()->id)->orderBy('complains.id', 'asc')->get();

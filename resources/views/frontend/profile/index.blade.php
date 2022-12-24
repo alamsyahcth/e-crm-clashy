@@ -15,6 +15,17 @@
       <div class="col-md-12 mb-5">
         <h3>Profil</h3>
       </div>
+      @if(Auth::check() == true)
+        @if(Auth::user()->role == 2)
+          @if(Auth::user()->point == 30)
+            <div class="card bg-primary border-0 mb-3">
+              <div class="card-body">
+                <h5 class="mb-0">Selamat {{ Auth::user()->name }} point kamu sudah 30 dapatkan promo menarik dari kami !</h5>
+              </div>
+            </div>
+          @endif
+        @endif
+      @endif
       <div class="col-md-12 bg-light">
         <ul class="nav nav-pills">
           <li class="nav-item">

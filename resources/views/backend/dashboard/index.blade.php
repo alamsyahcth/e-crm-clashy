@@ -10,12 +10,12 @@
   <div class="col-md-8 stretch-card grid-margin">
     <div class="card">
       <div class="card-body">
-        <div class="d-flex justify-content-between flex-wrap">
+        {{-- <div class="d-flex justify-content-between flex-wrap">
           <div>
             <div class="card-title mb-0">Total Keseluruhan Bintang</div>
             <h3 class="font-weight-bold mb-0">{{ $getStars }} <i class="mdi mdi-star text-warning"></i></h3>
           </div>
-        </div>
+        </div> --}}
         <div class="flot-chart-wrapper mt-5">
           <canvas id="chartStars"></canvas>
         </div>
