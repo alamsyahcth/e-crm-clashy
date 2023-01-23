@@ -85,7 +85,7 @@ class ReportController extends Controller
                         ->where('reviews.created_at','>=',$request->first_date)
                         ->where('reviews.created_at','<=',$request->last_date)
                         ->select('products.name', DB::raw('SUM(reviews.stars) as review_stars'), DB::raw('COUNT(reviews.stars) as count_stars'), DB::raw('SUM(reviews.stars)/COUNT(reviews.stars) as average_stars'))
-                        ->groupBy('products.id')
+                        ->groupBy('products.id','products.name')
                         ->get();
                 $reportName = 'Laporan Data Review Produk';
             } else if($slug == 'booking') {

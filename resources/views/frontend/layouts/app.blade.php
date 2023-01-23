@@ -75,8 +75,8 @@
     .text-primary{
       color: #B16154 !important;
     }
-    .btn{
-
+    .text-10{
+      font-size: 10px;
     }
   </style>
 </head>

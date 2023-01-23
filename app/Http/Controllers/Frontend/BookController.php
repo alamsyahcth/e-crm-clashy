@@ -14,6 +14,7 @@ use DB;
 use Auth;
 use Crypt;
 use Barryvdh\DomPDF\Facade\Pdf;
+use File;
 
 class BookController extends Controller
 {
@@ -105,7 +106,36 @@ class BookController extends Controller
                 ->join('products','products.id','=','books.product_id')
                 ->join('users','users.id','=','books.user_id')
                 ->where('books.id','=',$id)
-                ->select('books.id as book_id', 'products.name as product_name', 'products.price as product_price', 'products.image as product_image', 'books.invoice', 'employees.name as employee_name', 'employees.email as employee_email', 'employees.phone as employee_phone','schedules.day as schedule_day', 'schedules.date as schedule_date','schedule_details.time_start', 'schedule_details.time_end', 'books.created_at as books_created_at', 'users.name as user_name', 'users.email as user_email', 'users.phone as user_phone', 'books.status as book_status', 'is_promo')
+                ->select('books.id as book_id', 'products.name as product_name', 'products.price as product_price', 'products.image as product_image', 'books.invoice', 'employees.name as employee_name', 'employees.email as employee_email', 'employees.phone as employee_phone','schedules.day as schedule_day', 'schedules.date as schedule_date','schedule_details.time_start', 'schedule_details.time_end', 'books.created_at as books_created_at', 'users.name as user_name', 'users.email as user_email', 'users.phone as user_phone', 'books.status as book_status', 'is_promo', 'payment_status')
                 ->first();
+    }
+    
+    public function payment(Request $request) {
+        $image = $this->handleImage($request->file('evidence_of_transfer'), 'payment', null);
+        $data = Book::where('id', $request->id)->update([
+            'transfer_date' => date('Y-m-d'),
+            'account_number' => $request->account_number,
+            'to_bank' => $request->to_bank,
+            'on_behalf_of' => $request->on_behalf_of,
+            'total_transfers' => $request->total_transfers,
+            'remaining_payment' => $request->remaining_payment,
+            'evidence_of_transfer' => $image,
+            'payment_status' => 1,
+        ]);
+
+        if($data) {
+            return redirect('profil/history-booking');
+        }
+    }
+
+    public function handleImage($data, $path, $oldData)
+    {
+        $file = $data;
+        $name = $path.'-'.date('ymd').rand(100, 999).$file->getClientOriginalName();
+        $to = 'img/'.$path;
+        $file->move($to, $name);
+        File::delete(base_path().'/public/img/'.$path.'/'.$oldData);
+
+        return $name;
     }
 }

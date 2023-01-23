@@ -23,6 +23,7 @@ Route::post('/produk/complain/{id}', [App\Http\Controllers\Frontend\ProductContr
 Route::get('/book/search/{date}/{slug}', [App\Http\Controllers\Frontend\BookController::class, 'search']);
 Route::post('/book/search/store', [App\Http\Controllers\Frontend\BookController::class, 'index']);
 Route::post('/book/store', [App\Http\Controllers\Frontend\BookController::class, 'store']);
+Route::post('/book/payment', [App\Http\Controllers\Frontend\BookController::class, 'payment']);
 Route::get('/book/success/{id}', [App\Http\Controllers\Frontend\BookController::class, 'bookSuccess']);
 Route::get('/book/print/{id}', [App\Http\Controllers\Frontend\BookController::class, 'printPdf']);
 
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['admin']], function() {
             Route::get('/', [App\Http\Controllers\Backend\BookController::class, 'index']);
             Route::get('/show/{id}', [App\Http\Controllers\Backend\BookController::class, 'show']);
             Route::get('action/{status}/{id}', [App\Http\Controllers\Backend\BookController::class, 'action']);
+            Route::post('payment', [App\Http\Controllers\Backend\BookController::class, 'actionPayment']);
         });
 
         Route::group(['prefix' => 'jadwal', 'as' => 'jadwal.'], function () {

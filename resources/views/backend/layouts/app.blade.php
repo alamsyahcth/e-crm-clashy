@@ -97,6 +97,7 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+  @stack('modal')
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="{{ asset('backend/vendors/js/vendor.bundle.base.js') }}"></script>

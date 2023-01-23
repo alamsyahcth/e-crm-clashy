@@ -16,5 +16,13 @@ class Book extends Model
         'invoice',
         'status',
         'is_promo',
+        'transfer_date',
+        'account_number',
+        'to_bank',
+        'on_behalf_of',
+        'total_transfers',
+        'remaining_payment',
+        'evidence_of_transfer',
+        'payment_status',
     ];
 }

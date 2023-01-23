@@ -14,6 +14,7 @@ use DB;
 use Auth;
 use Crypt;
 use Hash;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -66,16 +67,22 @@ class ProfileController extends Controller
     }
 
     public function history() {
+        $checked = ScheduleDetail::join('books','books.schedule_detail_id','=','schedule_details.id')
+                ->join('products','products.id','=','books.product_id')
+                   ->where('books.user_id', Auth::user()->id)
+                   ->select('products.name as product_name','books.created_at as book_created_at')
+                   ->get();
          $data = ScheduleDetail::join('books','books.schedule_detail_id','=','schedule_details.id')
                 ->join('schedules','schedules.id','=','schedule_details.schedule_id')
                 ->join('employees','employees.id','=','schedule_details.employee_id')
                 ->join('products','products.id','=','books.product_id')
                 ->join('users','users.id','=','books.user_id')
-                ->select('books.id as book_id', 'products.name as product_name', 'products.price as product_price', 'products.image as product_image', 'books.invoice', 'employees.name as employee_name', 'schedules.day as schedule_day', 'schedules.date as schedule_date','schedule_details.time_start', 'schedule_details.time_end', 'books.created_at as books_created_at','users.name as user_name', 'books.status as book_status', 'is_promo')
+                ->select('books.id as book_id', 'products.name as product_name', 'products.price as product_price', 'products.image as product_image', 'books.invoice', 'employees.name as employee_name', 'schedules.day as schedule_day', 'schedules.date as schedule_date','schedule_details.time_start', 'schedule_details.time_end', 'books.created_at as books_created_at','users.name as user_name', 'books.status as book_status', 'is_promo', 'payment_status')
                 ->where('books.user_id', Auth::user()->id)
                 ->get();
         return view('frontend.profile.index', compact([
-            'data'
+            'data',
+            'checked'
         ]));
     }
 

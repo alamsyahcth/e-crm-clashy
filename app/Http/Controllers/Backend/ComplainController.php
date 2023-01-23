@@ -78,7 +78,7 @@ class ComplainController extends Controller
                 ->join('users','users.id','=','complains.user_id')
                 ->where('is_customer', 1)
                 ->select('complains.user_id', 'users.name', 'users.email', 'users.phone')
-                ->groupBy('complains.user_id')
+                ->groupBy('complains.user_id', 'users.name', 'users.email', 'users.phone')
                 ->get();
         $product = Product::find($id);
         $role = $this->role;
