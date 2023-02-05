@@ -42,6 +42,7 @@ class HomeController extends Controller
                     ->where('books.user_id', Auth::user()->id)
                     ->where('books.status', '=', 1)
                     ->where('books.rate_status', '=', null)
+                    ->orWhere('books.rate_status', '=', '')
                     ->get();
         } else {
             $bookDone = null;
