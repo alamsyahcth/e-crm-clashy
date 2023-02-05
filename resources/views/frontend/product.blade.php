@@ -16,7 +16,7 @@
         <!-- PRODUCT SLIDER-->
         <div class="row m-sm-0">
           <div class="col-sm-10 order-1 order-sm-2">
-            <img src="{{ asset('img/product/'.$product->image) }}" class="img-fluid" alt="">
+            <img src="{{ asset('img/product/'.$product->image) }}" class="w-100" alt="">
           </div>
         </div>
       </div>

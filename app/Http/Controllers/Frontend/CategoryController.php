@@ -35,7 +35,7 @@ class CategoryController extends Controller
             if($dataProduct->count() == 0) {
                 return abort(404);
             } else {
-                $product = $dataProduct->paginate(1);
+                $product = $dataProduct->paginate(8);
             }
         }
         return view('frontend.category', compact([

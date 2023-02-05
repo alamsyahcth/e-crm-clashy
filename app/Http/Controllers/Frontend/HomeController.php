@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         $banner = Banner::get();
         $category = CategoryProduct::get();
-        $product = Product::where('recomendation', 1)->paginate(1);
+        $product = Product::where('recomendation', 1)->paginate(8);
 
         if(Auth::check() == true) {
             $bookDone = ScheduleDetail::join('books','books.schedule_detail_id','=','schedule_details.id')
