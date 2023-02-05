@@ -24,5 +24,6 @@ class Book extends Model
         'remaining_payment',
         'evidence_of_transfer',
         'payment_status',
+        'rate_status'
     ];
 }

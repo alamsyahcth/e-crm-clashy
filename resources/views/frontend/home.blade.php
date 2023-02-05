@@ -182,59 +182,157 @@ var swiper = new Swiper(".banner-slide", {
     prevEl: ".swiper-button-prev",
   },
 });
+
+@if(Auth::check() == true)
+  @if(Auth::user()->role == 2)
+    @if($countBookDone != 0)
+      var myModal = new bootstrap.Modal(document.getElementById("productView"), {});
+        document.onreadystatechange = function () {
+        myModal.show();
+      };
+    @endif
+  @endif
+@endif
+
+// document.querySelectorAll('.feedback li').forEach(entry => entry.addEventListener('click', e => {
+//   if(!entry.classList.contains('active')) {
+//     document.querySelector('.feedback li.active').classList.remove('active');
+//     entry.classList.add('active');
+//   }
+//   e.preventDefault();
+// }));
+
+$('.feedback').each(function(iteration) {
+  $(document).on('click', '.data-book[data-book-iteration='+iteration+'] .feedback li', function() {
+    let data = $(this).data('rate')
+    let book = $(this).data('book')
+    $('.data-book[data-book-iteration='+iteration+'] .feedback li').removeClass('active');
+    $('.data-book[data-book-iteration='+iteration+'] .feedback li[data-rate='+data+']').addClass('active')
+
+    //console.log("book_id: "+book+", rate: "+data)
+
+    $.ajax({
+      url: window.location.origin+'/book-rate/'+book+'/'+data,
+      type: 'get',
+      dataType: 'json',
+      success: function(res) {
+        $('.book-'+book).fadeOut(1000);
+      }
+    })
+  });
+})
 </script>
 @endpush
 
 @push('modal')
-<div class="modal fade" id="productView" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content overflow-hidden border-0">
-      <button class="btn-close p-4 position-absolute top-0 end-0 z-index-20 shadow-0" type="button"
-        data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body p-0">
-        <div class="row align-items-stretch">
-          <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
-              style="background: url(img/product-5.jpg)" href="img/product-5.jpg') }}" data-gallery="gallery1"
-              data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-              href="img/product-5-alt-1.jpg') }}" data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a><a
-              class="glightbox d-none" href="img/product-5-alt-2.jpg') }}" data-gallery="gallery1"
-              data-glightbox="Red digital smartwatch"></a>
-          </div>
-          <div class="col-lg-6">
-            <div class="p-4 my-md-4">
-              <ul class="list-inline mb-2">
-                <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
-                <li class="list-inline-item m-0 1"><i class="fas fa-star small text-warning"></i></li>
-                <li class="list-inline-item m-0 2"><i class="fas fa-star small text-warning"></i></li>
-                <li class="list-inline-item m-0 3"><i class="fas fa-star small text-warning"></i></li>
-                <li class="list-inline-item m-0 4"><i class="fas fa-star small text-warning"></i></li>
-              </ul>
-              <h2 class="h4">Red digital smartwatch</h2>
-              <p class="text-muted">$250</p>
-              <p class="text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper
-                leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur
-                ridiculus mus. Vestibulum ultricies aliquam convallis.</p>
-              <div class="row align-items-stretch mb-4 gx-0">
-                <div class="col-sm-7">
-                  <div class="border d-flex align-items-center justify-content-between py-1 px-3"><span
-                      class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
-                    <div class="quantity">
-                      <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                      <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
-                      <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+@if(Auth::check() == true)
+  @if(Auth::user()->role == 2)
+    @if($countBookDone != 0)
+      <div class="modal fade" id="productView" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content overflow-hidden border-0">
+            <div class="modal-body">
+              <h3 class="mb-3 pb-3 border-bottom">Hai Treatment kamu sudah selesai ayo beri penilaian</h3>
+              <div class="row mt-3">
+                @foreach ($bookDone as $value => $v)
+                  <div class="col-md-12 border-bottom py-3 data-book book-{{ $v->book_id }}" data-book-iteration="{{ $value }}">
+                    <div class="row h-100">
+                      <div class="col-md-2 my-auto">
+                        <img src="{{ asset('img/product/'.$v->product_image) }}" class="img-fluid rounded" alt="">
+                      </div>
+                      <div class="col-md-4 my-auto">
+                        <p class="mb-0">Nama Customer:</p>
+                        <h6>{{ $v->user_name }}</h6>
+                      </div>
+                      <div class="col-md-6 my-auto">
+                        <p class="mb-0">No.Invoice:</p>
+                        <h6>{{ $v->invoice }}</h6>
+                      </div>
+                      <div class="col-md-2"></div>
+                      <div class="col-md-4 my-auto">
+                        <p class="mb-0">Hari dan Tanggal:</p>
+                        <h6>{{ $v->schedule_day }} {{ getDateFormat($v->schedule_date) }}<br> {{ timeFormat($v->time_start) }} - {{ timeFormat($v->time_end) }}</h6>
+                      </div>
+                      <div class="col-md-6 my-auto">
+                        <p class="mb-0">Eyelash Technician</p>
+                        <h6>{{ $v->employee_name }}</h6>
+                      </div>
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10 mt-4">
+                        <p class="mb-0">Beri Penilaian</p>
+                        <ul class="feedback">
+                          <li class="angry" data-book="{{ $v->book_id }}" data-rate="1">
+                            <div>
+                              <svg class="eye left">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="eye right">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="mouth">
+                                <use xlink:href="#mouth">
+                              </svg>
+                            </div>
+                          </li>
+                          <li class="sad" data-book="{{ $v->book_id }}" data-rate="2">
+                            <div>
+                              <svg class="eye left">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="eye right">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="mouth">
+                                <use xlink:href="#mouth">
+                              </svg>
+                            </div>
+                          </li>
+                          <li class="ok" data-book="{{ $v->book_id }}" data-rate="3">
+                            <div></div>
+                          </li>
+                          <li class="good" data-book="{{ $v->book_id }}" data-rate="4">
+                            <div>
+                              <svg class="eye left">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="eye right">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="mouth">
+                                <use xlink:href="#mouth">
+                              </svg>
+                            </div>
+                          </li>
+                          <li class="happy" data-book="{{ $v->book_id }}" data-rate="5">
+                            <div>
+                              <svg class="eye left">
+                                <use xlink:href="#eye">
+                              </svg>
+                              <svg class="eye right">
+                                <use xlink:href="#eye">
+                              </svg>
+                            </div>
+                          </li>
+                        </ul>
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 4" id="eye">
+                            <path d="M1,1 C1.83333333,2.16666667 2.66666667,2.75 3.5,2.75 C4.33333333,2.75 5.16666667,2.16666667 6,1"></path>
+                          </symbol>
+                          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 7" id="mouth">
+                            <path d="M1,5.5 C3.66666667,2.5 6.33333333,1 9,1 C11.6666667,1 14.3333333,2.5 17,5.5"></path>
+                          </symbol>
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-5"><a
-                    class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                    href="cart.html">Add to cart</a></div>
-              </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i
-                  class="far fa-heart me-2"></i>Add to wish list</a>
+                @endforeach
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    @endif
+  @endif
+@endif
 @endpush

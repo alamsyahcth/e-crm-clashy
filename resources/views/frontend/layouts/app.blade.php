@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/style.default.css') }}" id="theme-stylesheet">
   <!-- Custom stylesheet - for your changes-->
   <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/app.css') }}">
   <!-- Favicon-->
   <link rel="stylesheet" href="{{ asset('backend/vendors/datatable/datatable.min.css') }}">
   @stack('style')
@@ -77,6 +78,10 @@
     }
     .text-10{
       font-size: 10px;
+    }
+    #productView p{
+      font-size: 10px;
+      font-weight: 500;
     }
   </style>
 </head>

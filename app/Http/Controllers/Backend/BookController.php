@@ -32,7 +32,7 @@ class BookController extends Controller
                 ->join('employees','employees.id','=','schedule_details.employee_id')
                 ->join('products','products.id','=','books.product_id')
                 ->join('users','users.id','=','books.user_id')
-                ->select('books.id as book_id', 'products.name as product_name', 'products.price as product_price', 'products.image as product_image', 'books.invoice', 'employees.name as employee_name', 'schedules.day as schedule_day', 'schedules.date as schedule_date','schedule_details.time_start', 'schedule_details.time_end', 'books.created_at as books_created_at','users.name as user_name', 'books.status as book_status', 'is_promo', 'transfer_date','account_number','to_bank','on_behalf_of','total_transfers','remaining_payment','evidence_of_transfer','payment_status')
+                ->select('books.id as book_id', 'products.name as product_name', 'products.price as product_price', 'products.image as product_image', 'books.invoice', 'employees.name as employee_name', 'schedules.day as schedule_day', 'schedules.date as schedule_date','schedule_details.time_start', 'schedule_details.time_end', 'books.created_at as books_created_at','users.name as user_name', 'books.status as book_status', 'is_promo', 'transfer_date','account_number','to_bank','on_behalf_of','total_transfers','remaining_payment','evidence_of_transfer','payment_status','rate_status')
                 ->orderBy('books.id', 'desc')
                 ->get();
         $role = $this->role;

@@ -26,6 +26,7 @@ Route::post('/book/store', [App\Http\Controllers\Frontend\BookController::class,
 Route::post('/book/payment', [App\Http\Controllers\Frontend\BookController::class, 'payment']);
 Route::get('/book/success/{id}', [App\Http\Controllers\Frontend\BookController::class, 'bookSuccess']);
 Route::get('/book/print/{id}', [App\Http\Controllers\Frontend\BookController::class, 'printPdf']);
+Route::get('/book-rate/{book_id}/{book_rate}', [App\Http\Controllers\Frontend\HomeController::class, 'bookRate']);
 
 Route::group(['middleware' => ['customer']], function() {
     Route::group(['prefix' => 'profil', 'as' => 'profil.'], function () {

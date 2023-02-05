@@ -20,6 +20,7 @@
                 <th>Tanggal</th>
                 <th>Waktu</th>
                 <th>Promo</th>
+                <th>Penilaian</th>
                 <th width="15%">Status</th>
                 <th width="10%">Action</th>
               </tr>
@@ -36,6 +37,21 @@
                   @if($value->is_promo == 'yes')
                     <div class="badge badge-outline-primary text-primary">Ya</div>
                   @endif
+                </td>
+                <td class="text-center">
+                    @if($value->rate_status == '1')
+                      <span class="text-danger">Sangat Buruk</span>
+                    @elseif($value->rate_status == '2')
+                      <span class="text-warning">Buruk</span>
+                    @elseif($value->rate_status == '3')
+                      <span class="text-secondary">Netral</span>
+                    @elseif($value->rate_status == '4')
+                      <span class="text-primary">Baik</span>
+                    @elseif($value->rate_status == '5')
+                      <span class="text-success">Sangat Baik</span>
+                    @else
+                      -
+                    @endif
                 </td>
                 <td>
                   @if($value->book_status == 0)
