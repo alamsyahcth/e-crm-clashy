@@ -16,6 +16,9 @@
           <li class="nav-item">
             <a class="nav-link @if(request()->is('produk*')) active @endif" href="{{ url('/produk') }}">Produk</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link @if(request()->is('hubungi-kami*')) active @endif" href="{{ url('/hubungi-kami') }}">Hubungi Kami</a>
+          </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           @guest

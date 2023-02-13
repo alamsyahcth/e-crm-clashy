@@ -94,8 +94,8 @@
     <div class="py-1">
       <hr>
     </div>
-    <li class="nav-item @if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*')) active @endif">
-      <a class="nav-link @if(!request()->is('admin/user') || !request()->is('admin/user/create') || !request()->is('admin/banner*')) collapsed @endif" data-toggle="collapse" href="#menu-settings" aria-expanded="@if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*')) true @else false @endif" aria-controls="menu-settings">
+    <li class="nav-item @if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*') || request()->is('admin/article*')) active @endif">
+      <a class="nav-link @if(!request()->is('admin/user') || !request()->is('admin/user/create') || !request()->is('admin/banner*') || !request()->is('admin/article*')) collapsed @endif" data-toggle="collapse" href="#menu-settings" aria-expanded="@if(request()->is('admin/user') || request()->is('admin/user/create') || request()->is('admin/banner*') || request()->is('admin/article*')) true @else false @endif" aria-controls="menu-settings">
         <i class="mdi mdi-settings menu-icon"></i>
         <span class="menu-title">Pengaturan</span>
         <i class="menu-arrow"></i>
@@ -104,6 +104,9 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item @if(request()->is('admin/banner*')) active @endif">
             <a class="nav-link @if(request()->is('admin/banner*')) active @endif" href="{{ url('admin/banner') }}">Banner</a>
+          </li>
+          <li class="nav-item @if(request()->is('admin/article*')) active @endif">
+            <a class="nav-link @if(request()->is('admin/article*')) active @endif" href="{{ url('admin/article') }}">Article</a>
           </li>
           <li class="nav-item @if(request()->is('admin/user') || request()->is('admin/user/create')) active @endif">
             <a class="nav-link @if(request()->is('admin/user') || request()->is('admin/user/create')) active @endif" href="{{ url('admin/user') }}">Manage Admin</a>

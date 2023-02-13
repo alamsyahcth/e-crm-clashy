@@ -44,10 +44,12 @@ class HomeController extends Controller
                     ->where('books.rate_status', '=', null)
                     ->orWhere('books.rate_status', '=', '')
                     ->get();
+            $countBookDone = $bookDone->count();
         } else {
             $bookDone = null;
+            $countBookDone = null;
         }
-        $countBookDone = $bookDone->count();
+        
         return view('frontend.home', compact([
             'banner',
             'category',

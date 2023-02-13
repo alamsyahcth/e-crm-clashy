@@ -50,7 +50,26 @@
     <div class="row py-5">
       <div class="col-md-12 text-center">
         <img src="{{ asset('img/logo.jpg') }}" alt="" class="mb-5">
-        <ul class="list-unstyled d-flex justify-content-center mb-0">
+      </div>
+      <div class="col-md-12 text-center bg-primary p-5">
+        <p class="fw-bold">Alamat</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p><span class="fw-bold">Email</span> test@mail.com</p>
+        <p><span class="fw-bold">No Handphone</span> 089999999999</p>
+      </div>
+      <div class="d-flex justify-content-between align-items-center bg-dark py-5">
+        <ul class="list-unstyled d-flex justify-content-end mb-0">
+          <li><a class="footer-link mx-4" href="{{ url('/') }}">Home</a></li>
+          <li><a class="footer-link mx-4" href="{{ url('produk') }}">Produk</a></li>
+          <li><a class="footer-link mx-4" href="{{ url('tentang-kami') }}">Tentang Kami</a></li>
+          <li><a class="footer-link mx-4" href="{{ url('hubungi-kami') }}">Hubungi Kami</a></li>
+          <li><a class="footer-link mx-4" href="{{ url('article') }}">Artikel</a></li>
+        </ul>
+        <ul class="list-unstyled d-flex justify-content-end mb-0">
           <li><a class="footer-link mx-4" href="#!">Twitter</a></li>
           <li><a class="footer-link mx-4" href="#!">Instagram</a></li>
           <li><a class="footer-link mx-4" href="#!">Tumblr</a></li>

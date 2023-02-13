@@ -27,6 +27,9 @@ Route::post('/book/payment', [App\Http\Controllers\Frontend\BookController::clas
 Route::get('/book/success/{id}', [App\Http\Controllers\Frontend\BookController::class, 'bookSuccess']);
 Route::get('/book/print/{id}', [App\Http\Controllers\Frontend\BookController::class, 'printPdf']);
 Route::get('/book-rate/{book_id}/{book_rate}', [App\Http\Controllers\Frontend\HomeController::class, 'bookRate']);
+Route::get('/hubungi-kami', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
+Route::get('/article/all', [App\Http\Controllers\Frontend\ArticleController::class, 'index']);
+Route::get('/article/all/{id}', [App\Http\Controllers\Frontend\ArticleController::class, 'getDetail']);
 
 Route::group(['middleware' => ['customer']], function() {
     Route::group(['prefix' => 'profil', 'as' => 'profil.'], function () {
@@ -135,6 +138,16 @@ Route::group(['middleware' => ['admin']], function() {
             Route::post('/update/{id}', [App\Http\Controllers\Backend\BannerController::class, 'update']);
             Route::get('/destroy/{id}', [App\Http\Controllers\Backend\BannerController::class, 'destroy']);
         });
+
+        Route::group(['prefix' => 'article', 'as' => 'article.'], function () {
+            Route::get('/', [App\Http\Controllers\Backend\ArticleController::class, 'index']);
+            Route::get('/create', [App\Http\Controllers\Backend\ArticleController::class, 'create']);
+            Route::post('/store', [App\Http\Controllers\Backend\ArticleController::class, 'store']);
+            Route::get('/edit/{id}', [App\Http\Controllers\Backend\ArticleController::class, 'edit']);
+            Route::post('/update/{id}', [App\Http\Controllers\Backend\ArticleController::class, 'update']);
+            Route::get('/destroy/{id}', [App\Http\Controllers\Backend\ArticleController::class, 'destroy']);
+        });
+
 
         Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function () {
             Route::get('/{slug}', [App\Http\Controllers\Backend\ReportController::class, 'index']);

@@ -30,6 +30,12 @@ class CategoryController extends Controller
             return abort(404);
         } else if ($slug == 'profil') {
             return redirect('profil/edit-profil');
+        } else if ($slug == 'hubungi-kami') {
+            return view('frontend.contact');
+        } else if ($slug == 'tentang-kami') {
+            return view('frontend.about-us');
+        } else if ($slug == 'article') {
+            return redirect('article/all');
         } else {
             $dataProduct = Product::where('category_id', $category->id);
             if($dataProduct->count() == 0) {

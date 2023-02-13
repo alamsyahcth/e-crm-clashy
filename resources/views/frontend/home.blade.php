@@ -192,6 +192,11 @@ var swiper = new Swiper(".banner-slide", {
       };
     @endif
   @endif
+@else
+var myModal = new bootstrap.Modal(document.getElementById("actionToLogin"), {});
+  document.onreadystatechange = function () {
+  myModal.show();
+};
 @endif
 
 // document.querySelectorAll('.feedback li').forEach(entry => entry.addEventListener('click', e => {
@@ -334,5 +339,18 @@ $('.feedback').each(function(iteration) {
       </div>
     @endif
   @endif
+@else
+<div class="modal fade" id="actionToLogin" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content overflow-hidden border-0">
+      <div class="modal-body p-5 text-center">
+        <h6 class="mb-3 pb-3">Hai untuk pengalaman yang lebih berkesan ayo buat akun</h6>
+        <a href="{{ url('/register') }}" class="btn btn-dark w-100">Buat Akun</a>
+        <p class="my-3">kamu sudah punya akun?</p>
+        <a href="{{ url('/login') }}" class="btn btn-outline-dark w-100">Login disini</a>
+      </div>
+    </div>
+  </div>
+</div>
 @endif
 @endpush
